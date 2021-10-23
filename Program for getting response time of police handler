@@ -1,0 +1,35 @@
+from datetime import datetime
+from statistics import stdev,mean
+
+
+df = pd.DataFrame(final,columns=["id-1", "id-2", "created_at-1", "created_at-2"])
+df=df.to_numpy()
+df=df.tolist()
+time=[]
+t1=[]
+t2=[]
+
+for i in df:
+  t1.append(datetime.strptime(str(i[2]), '%Y-%m-%d %H:%M:%S'))
+for i in df:
+  t2.append(datetime.strptime(str(i[3]), '%Y-%m-%d %H:%M:%S'))
+
+for i in range(len(t1)):
+    t=t1[i]-t2[i]
+    t=round(t.total_seconds()/60)
+    time.append(t)
+    
+
+print("Maximum of response time",max(time))
+print("Minimum of response time",min(time))
+print("Mean of response time",mean(time))
+print("Standard devaition of response time",stdev(time))
+
+#####################################################
+#plotting time diagram
+import plotly.graph_objects as go
+id=[]
+for i in df:
+  id.append(i[0])
+figure = go.Figure([go.Scatter(x=id, y=time)])
+figure.show()
