@@ -1,0 +1,26 @@
+#############program to get all retweets###############
+import sys
+import tweepy
+import csv
+
+# Twitter API credentials
+consumer_key = 'xxxxxxxxxxx'
+consumer_secret ="xxxxxxxxxxxxxxxx"
+access_key =  'xxxxxxxxxxxxxxx'
+access_secret = 'xxxxxxxxxxxxxxxxxxxxx'
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_key, access_secret)
+api = tweepy.API(auth,wait_on_rate_limit=True)
+id1=[]
+id2=[]
+tx=[]
+tt=[]
+non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
+for full_tweets in tweepy.Cursor(api.user_timeline,screen_name='MumbaiPolice',timeout=999999).items(10):
+  for tweet in tweepy.Cursor(api.search,q='to:'+'MumbaiPolice',timeout=999999).items(10000):
+        id1.append(tweet.id_str)
+        id2.append(tweet.in_reply_to_status_id_str)
+        tx.append(tweet.text.encode("utf-8").decode("utf-8"))
+        tt.append(tweet.created_at)
+        
