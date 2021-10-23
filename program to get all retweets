@@ -24,3 +24,25 @@ for full_tweets in tweepy.Cursor(api.user_timeline,screen_name='MumbaiPolice',ti
         tx.append(tweet.text.encode("utf-8").decode("utf-8"))
         tt.append(tweet.created_at)
         
+##############writing data to file######################      
+with open('MumbaiPolice_withreplyid.csv', 'a') as f:
+    csv_writer = csv.DictWriter(f, fieldnames=('id','reply_id', 'text','created_at'))
+    csv_writer.writeheader()
+    for i in range(len(id1)):
+        row = {'id': id1[i], 'reply_id': id2[i],'text': tx[i] 'created_at': tt[i]}
+        csv_writer.writerow(row)
+        
+ #########################
+import pandas as pd
+
+# making data frame from csv file
+data = pd.read_csv("filename.csv")
+print(len(data))  
+# sorting by first name
+#data.sort_values("First Name", inplace = True)
+  
+# dropping ALL duplicte values
+data=data.drop_duplicates(subset=None, keep='first', inplace=False)
+data=data.to_numpy()
+# displaying dataata
+print(len(data))      
