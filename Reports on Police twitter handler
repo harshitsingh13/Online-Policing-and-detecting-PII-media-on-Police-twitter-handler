@@ -1,0 +1,35 @@
+c=0 
+report=[]    
+for i in data:
+  if(re.search('report',i[1])):
+    c+=1
+    report.append(i[1])
+    #print(c,i[1])
+print(c)
+
+c=0 
+request=[]    
+for i in data:
+  if(re.search('request',i[1])):
+    c+=1
+    request.append(i[1])
+    #print(c,i[1])
+print(c)
+
+c=0 
+appreciation=[]    
+for i in data:
+  if(re.search('appreciation',i[1]) or re.search('Thank you',i[1]) or re.search('thank you',i[1])):
+    c+=1
+    appreciation.append(i[1])
+    #print(c,i[1])
+print(c)
+
+c=0 
+accountability=[]    
+for i in data:
+  if(re.search('responsible',i[1])):
+    c+=1
+    accountability.append(i[1])
+    #print(c,i[1])
+print(c)
